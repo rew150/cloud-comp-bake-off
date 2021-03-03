@@ -9,6 +9,7 @@ import (
 type DbService interface {
 	SaveNewAccount(username, password string) error
 	FindHashedPassword(username string) (password string, found bool, err error)
+	UpdatePassword(username, password string) (err error)
 }
 
 type StubDb struct{}
@@ -37,4 +38,9 @@ func (s StubDb) FindHashedPassword(username string) (password string, found bool
 	}
 
 	return StubData.Password, true, nil
+}
+
+func (s StubDb) UpdatePassword(username, password string) error {
+	fmt.Println("Stub Update: username =", username, "password =", password)
+	return nil
 }
