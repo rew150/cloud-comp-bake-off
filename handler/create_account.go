@@ -7,13 +7,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type CreateAccountDto struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
-
 func CreateAccount(c *gin.Context) {
-	var body CreateAccountDto
+	var body AccountDto
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.JSON(400, gin.H{
 			"error": err.Error(),
